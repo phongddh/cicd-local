@@ -12,6 +12,9 @@ Vagrant.configure("2") do |config|
       vb.memory = "2048"
     end
 
+    # Sync folder from host to VM
+    config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
     # Run shell commands
     dev.vm.provision "shell", inline: <<-SHELL
       # Remove password for access root account and allow SSH with key
@@ -24,7 +27,7 @@ Vagrant.configure("2") do |config|
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
+      cat /vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
 
@@ -49,6 +52,9 @@ EOF
       vb.memory = "2048"
     end
 
+    # Sync folder from host to VM
+    config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
     # Run shell commands
     stag.vm.provision "shell", inline: <<-SHELL
       # Remove password for access root account and allow SSH with key
@@ -61,7 +67,7 @@ EOF
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
+      cat /vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
 
@@ -86,6 +92,9 @@ EOF
       vb.memory = "2048"
     end
 
+    # Sync folder from host to VM
+    config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
     # Run shell commands
     prod.vm.provision "shell", inline: <<-SHELL
       # Remove password for access root account and allow SSH with key
@@ -98,7 +107,7 @@ EOF
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
+      cat /vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
 
@@ -123,6 +132,9 @@ EOF
       vb.memory = "2048"
     end
 
+    # Sync folder from host to VM
+    config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
     # Run shell commands
     gitlab.vm.provision "shell", inline: <<-SHELL
       # Remove password for access root account and allow SSH with key
@@ -135,7 +147,7 @@ EOF
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
+      cat /vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
 
@@ -166,6 +178,9 @@ EOF
       vb.memory = "2048"
     end
 
+    # Sync folder from host to VM
+    config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
     # Run shell commands
     jenkins.vm.provision "shell", inline: <<-SHELL
       # Remove password for access root account and allow SSH with key
@@ -178,7 +193,7 @@ EOF
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
+      cat /vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
 
