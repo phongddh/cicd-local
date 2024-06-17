@@ -1,3 +1,4 @@
 #Command for Vagrant
 vagrant up
 vagrant global-status
+vagrant reload gitlab --provision

@@ -3,32 +3,68 @@
   become: yes
   tasks:
     - name: Install dependencies
-      apt:
+      ansible.builtin.apt:
         name:
-          - curl
-          - openssh-server
+          - apt-transport-https
           - ca-certificates
-          - tzdata
+          - curl
+          - gnupg
+          - lsb-release
         state: present
         update_cache: yes
-      vars:
-        packages:
-          - ca-certificates
-          - curl
-          - openssh-server
-          - postfix
 
-    - name: Add GitLab repository key
-      apt_key:
-        url: https://packages.gitlab.com/gpg.key
+    - name: Add Docker’s official GPG key
+      ansible.builtin.command:
+        cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+      args:
+        creates: /usr/share/keyrings/docker-archive-keyring.gpg
+
+    - name: Add the Docker repository
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
         state: present
 
-    - name: Add GitLab repository
-      apt_repository:
-        repo: 'deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ focal main'
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Docker
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
         state: present
 
-    - name: Install GitLab
-      apt:
-        name: gitlab-ce
-        state: present
+    - name: Pull the latest GitLab CE Docker image
+      ansible.builtin.docker_image:
+        name: gitlab/gitlab-ce
+        tag: latest
+        source: pull
+
+    - name: Create directories to store GitLab’s configuration and data
+      ansible.builtin.file:
+        path: /srv/gitlab/{{ item }}
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+      loop:
+        - config
+        - logs
+        - data
+
+    - name: Run the GitLab CE Docker container
+      ansible.builtin.docker_container:
+        name: gitlab
+        image: gitlab/gitlab-ce:latest
+        state: started
+        restart_policy: always
+        hostname: 192.168.56.50
+        published_ports:
+          - "443:443"
+          - "80:80"
+        volumes:
+          - /srv/gitlab/config:/etc/gitlab
+          - /srv/gitlab/logs:/var/log/gitlab
+          - /srv/gitlab/data:/var/opt/gitlab
