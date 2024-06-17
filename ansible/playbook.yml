@@ -1,0 +1,28 @@
+---
+- hosts: gitlab
+  become: yes
+  tasks:
+    - name: Install dependencies
+      apt:
+        name:
+          - curl
+          - openssh-server
+          - ca-certificates
+          - tzdata
+        state: present
+        update_cache: yes
+
+    - name: Add GitLab repository
+      apt_repository:
+        repo: 'deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ focal main'
+        state: present
+
+    - name: Install GitLab
+      apt:
+        name: gitlab-ce
+        state: present
+
+    - name: Configure GitLab
+      shell: >
+        EXTERNAL_URL="http://192.168.56.50"
+        apt-get install gitlab-ce
