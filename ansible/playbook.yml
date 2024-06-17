@@ -12,6 +12,11 @@
         state: present
         update_cache: yes
 
+    - name: Add GitLab repository key
+      apt_key:
+        url: https://packages.gitlab.com/gpg.key
+        state: present
+
     - name: Add GitLab repository
       apt_repository:
         repo: 'deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ focal main'
@@ -21,8 +26,3 @@
       apt:
         name: gitlab-ce
         state: present
-
-    - name: Configure GitLab
-      shell: >
-        EXTERNAL_URL="http://192.168.56.50"
-        apt-get install gitlab-ce
