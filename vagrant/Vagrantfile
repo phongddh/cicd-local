@@ -56,10 +56,11 @@ EOF
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#AuthorizedKeysFile yes/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
       sed -i 's/^AuthorizedKeysFile no/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
+      sed -i 's/^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2/AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+      cat ./vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
       192.168.56.10 prod
@@ -91,10 +92,11 @@ EOF
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#AuthorizedKeysFile yes/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
       sed -i 's/^AuthorizedKeysFile no/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
+      sed -i 's/^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2/AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+      cat ./vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
       192.168.56.10 prod
@@ -126,10 +128,11 @@ EOF
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#AuthorizedKeysFile yes/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
       sed -i 's/^AuthorizedKeysFile no/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
+      sed -i 's/^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2/AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+      cat ./vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
       192.168.56.10 prod
@@ -167,10 +170,11 @@ EOF
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#AuthorizedKeysFile yes/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
       sed -i 's/^AuthorizedKeysFile no/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
+      sed -i 's/^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2/AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat /home/pong/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+      cat ./vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
       192.168.56.10 prod
