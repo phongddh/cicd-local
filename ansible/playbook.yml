@@ -10,10 +10,11 @@
           - curl
           - gnupg
           - lsb-release
+          - python3-requests
         state: present
         update_cache: yes
 
-    - name: Add Docker’s official GPG key
+    - name: Add Docker official GPG key
       ansible.builtin.shell: |
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
       args:
@@ -42,7 +43,7 @@
         tag: latest
         source: pull
 
-    - name: Create directories to store GitLab’s configuration and data
+    - name: Create directories to store GitLab configuration and data
       ansible.builtin.file:
         path: /srv/gitlab/{{ item }}
         state: directory
