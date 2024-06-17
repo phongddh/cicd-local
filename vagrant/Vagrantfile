@@ -1,20 +1,19 @@
 Vagrant.configure("2") do |config|
-  # Define environment
-  vmname = "dev"
-  # Define the VM
-  config.vm.define "vmname" do |vmname|
-    vmname.vm.box = "generic/ubuntu2204"
-    vmname.vm.network "private_network", ip: "192.168.56.12"
-    vmname.vm.hostname = "vmname"
 
-    vmname.vm.provider "virtualbox" do |vb|
-      vb.name = "vmname"
+  # Define the dev VM
+  config.vm.define "dev" do |dev|
+    dev.vm.box = "generic/ubuntu2204"
+    dev.vm.network "private_network", ip: "192.168.56.12"
+    dev.vm.hostname = "dev"
+
+    dev.vm.provider "virtualbox" do |vb|
+      vb.name = "dev"
       vb.cpus = 2
       vb.memory = "2048"
     end
 
     # Run shell commands
-    vmname.vm.provision "shell", inline: <<-SHELL
+    dev.vm.provision "shell", inline: <<-SHELL
       # Set password for root account and allow SSH
       echo "root:123" | chpasswd
       sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -32,22 +31,20 @@ EOF
     SHELL
   end
 
-  # Define environment
-  vmname = "stag"
-  # Define the VM
-  config.vm.define "vmname" do |vmname|
-    vmname.vm.box = "generic/ubuntu2204"
-    vmname.vm.network "private_network", ip: "192.168.56.11"
-    vmname.vm.hostname = "vmname"
+  # Define the stag VM
+  config.vm.define "stag" do |stag|
+    stag.vm.box = "generic/ubuntu2204"
+    stag.vm.network "private_network", ip: "192.168.56.11"
+    stag.vm.hostname = "stag"
 
-    vmname.vm.provider "virtualbox" do |vb|
-      vb.name = "vmname"
+    stag.vm.provider "virtualbox" do |vb|
+      vb.name = "stag"
       vb.cpus = 2
       vb.memory = "2048"
     end
 
     # Run shell commands
-    vmname.vm.provision "shell", inline: <<-SHELL
+    stag.vm.provision "shell", inline: <<-SHELL
       # Set password for root account and allow SSH
       echo "root:123" | chpasswd
       sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -65,22 +62,20 @@ EOF
     SHELL
   end
 
-  # Define environment
-  vmname = "prod"
-  # Define the VM
-  config.vm.define "vmname" do |vmname|
-    vmname.vm.box = "generic/ubuntu2204"
-    vmname.vm.network "private_network", ip: "192.168.56.10"
-    vmname.vm.hostname = "vmname"
+  # Define the prod VM
+  config.vm.define "prod" do |prod|
+    prod.vm.box = "generic/ubuntu2204"
+    prod.vm.network "private_network", ip: "192.168.56.10"
+    prod.vm.hostname = "prod"
 
-    vmname.vm.provider "virtualbox" do |vb|
-      vb.name = "vmname"
+    prod.vm.provider "virtualbox" do |vb|
+      vb.name = "prod"
       vb.cpus = 2
       vb.memory = "2048"
     end
 
     # Run shell commands
-    vmname.vm.provision "shell", inline: <<-SHELL
+    prod.vm.provision "shell", inline: <<-SHELL
       # Set password for root account and allow SSH
       echo "root:123" | chpasswd
       sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -98,22 +93,20 @@ EOF
     SHELL
   end
 
-  # Define environment
-  vmname = "gitlab"
-  # Define the VM
-  config.vm.define "vmname" do |vmname|
-    vmname.vm.box = "generic/ubuntu2204"
-    vmname.vm.network "private_network", ip: "192.168.56.50"
-    vmname.vm.hostname = "vmname"
+  # Define the gitlab VM
+  config.vm.define "gitlab" do |gitlab|
+    gitlab.vm.box = "generic/ubuntu2204"
+    gitlab.vm.network "private_network", ip: "192.168.56.50"
+    gitlab.vm.hostname = "gitlab"
 
-    vmname.vm.provider "virtualbox" do |vb|
-      vb.name = "vmname"
+    gitlab.vm.provider "virtualbox" do |vb|
+      vb.name = "gitlab"
       vb.cpus = 2
       vb.memory = "2048"
     end
 
     # Run shell commands
-    vmname.vm.provision "shell", inline: <<-SHELL
+    gitlab.vm.provision "shell", inline: <<-SHELL
       # Set password for root account and allow SSH
       echo "root:123" | chpasswd
       sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -129,29 +122,28 @@ EOF
       192.168.56.60 jenkins
 EOF
     SHELL
+
     # Run Ansible playbook
-    vmname.vm.provision "ansible" do |ansible|
+    gitlab.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbook.yml"
       ansible.inventory_path = "ansible/inventory"
     end
   end
 
-  # Define environment
-  vmname = "jenkins"
-  # Define the VM
-  config.vm.define "vmname" do |vmname|
-    vmname.vm.box = "generic/ubuntu2204"
-    vmname.vm.network "private_network", ip: "192.168.56.60"
-    vmname.vm.hostname = "vmname"
+  # Define the jenkins VM
+  config.vm.define "jenkins" do |jenkins|
+    jenkins.vm.box = "generic/ubuntu2204"
+    jenkins.vm.network "private_network", ip: "192.168.56.60"
+    jenkins.vm.hostname = "jenkins"
 
-    vmname.vm.provider "virtualbox" do |vb|
-      vb.name = "vmname"
+    jenkins.vm.provider "virtualbox" do |vb|
+      vb.name = "jenkins"
       vb.cpus = 2
       vb.memory = "2048"
     end
 
     # Run shell commands
-    vmname.vm.provision "shell", inline: <<-SHELL
+    jenkins.vm.provision "shell", inline: <<-SHELL
       # Set password for root account and allow SSH
       echo "root:123" | chpasswd
       sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -168,4 +160,5 @@ EOF
 EOF
     SHELL
   end
+
 end
