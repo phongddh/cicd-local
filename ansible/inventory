@@ -1,2 +1,2 @@
 [gitlab]
-192.168.56.50 ansible_user=root ansible_password=123
+192.168.56.50 ansible_user=root
