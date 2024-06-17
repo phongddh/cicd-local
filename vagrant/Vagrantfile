@@ -20,13 +20,14 @@ Vagrant.configure("2") do |config|
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
       sed -i 's/^PubkeyAuthentication no/PubkeyAuthentication yes/' /etc/ssh/sshd_config
-      sed -i 's/^#AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/' /etc/ssh/sshd_config
+      sed -i 's|^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|' /etc/ssh/sshd_config
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat ./keys >> ~/.ssh/authorized_keys
+      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
+
       192.168.56.10 prod
       192.168.56.11 stag
       192.168.56.12 dev
@@ -56,13 +57,14 @@ EOF
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#AuthorizedKeysFile yes/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
       sed -i 's/^AuthorizedKeysFile no/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
-      sed -i 's/^#AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/' /etc/ssh/sshd_config
+      sed -i 's|^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|' /etc/ssh/sshd_config
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat ./keys >> ~/.ssh/authorized_keys
+      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
+
       192.168.56.10 prod
       192.168.56.11 stag
       192.168.56.12 dev
@@ -92,13 +94,14 @@ EOF
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#AuthorizedKeysFile yes/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
       sed -i 's/^AuthorizedKeysFile no/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
-      sed -i 's/^#AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/' /etc/ssh/sshd_config
+      sed -i 's|^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|' /etc/ssh/sshd_config
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat ./keys >> ~/.ssh/authorized_keys
+      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
+
       192.168.56.10 prod
       192.168.56.11 stag
       192.168.56.12 dev
@@ -128,13 +131,14 @@ EOF
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#AuthorizedKeysFile yes/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
       sed -i 's/^AuthorizedKeysFile no/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
-      sed -i 's/^#AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/' /etc/ssh/sshd_config
+      sed -i 's|^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|' /etc/ssh/sshd_config
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat ./keys >> ~/.ssh/authorized_keys
+      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
+
       192.168.56.10 prod
       192.168.56.11 stag
       192.168.56.12 dev
@@ -170,13 +174,14 @@ EOF
       sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
       sed -i 's/^#AuthorizedKeysFile yes/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
       sed -i 's/^AuthorizedKeysFile no/AuthorizedKeysFile yes/' /etc/ssh/sshd_config
-      sed -i 's/^#AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/AuthorizedKeysFile     .ssh\/authorized_keys .ssh\/authorized_keys2/' /etc/ssh/sshd_config
+      sed -i 's|^#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|' /etc/ssh/sshd_config
       systemctl reload sshd
       # Copy contents of host's id_rsa.pub into authorized_keys
       mkdir -p ~/.ssh
-      cat ./keys >> ~/.ssh/authorized_keys
+      cat /home/pong/devops/cicd-local/vagrant/keys >> ~/.ssh/authorized_keys
       # Append the following content to /etc/hosts for accessing machines by HOSTNAME
       cat >>/etc/hosts<<EOF
+
       192.168.56.10 prod
       192.168.56.11 stag
       192.168.56.12 dev
