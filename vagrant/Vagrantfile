@@ -125,8 +125,8 @@ EOF
 
     # Run Ansible playbook
     gitlab.vm.provision "ansible" do |ansible|
-      ansible.playbook = "./ansible/playbook.yml"
-      ansible.inventory_path = "./ansible/inventory"
+      ansible.playbook = "../ansible/playbook.yml"
+      ansible.inventory_path = "../ansible/inventory"
     end
   end
 
