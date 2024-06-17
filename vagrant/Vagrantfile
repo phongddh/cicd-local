@@ -130,7 +130,7 @@ EOF
 EOF
     SHELL
     # Run Ansible playbook
-    gitlab.vm.provision "ansible" do |ansible|
+    vmname.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbook.yml"
       ansible.inventory_path = "ansible/inventory"
     end
