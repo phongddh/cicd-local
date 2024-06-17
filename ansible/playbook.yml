@@ -11,6 +11,12 @@
           - tzdata
         state: present
         update_cache: yes
+      vars:
+        packages:
+          - ca-certificates
+          - curl
+          - openssh-server
+          - postfix
 
     - name: Add GitLab repository key
       apt_key:
